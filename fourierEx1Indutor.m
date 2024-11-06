@@ -16,9 +16,6 @@ function fourierEx1Indutor(harm)
 	for t = 1:length(x)
 		for n = 1:2:N
 			y(t) = y(t) + (sin(n * pi * x(t)))/n;
-		end
-
-		for n = 1:2:N
 			vo(t) = vo(t) + ( (4/(sqrt(25+(4*(n^2)*(pi^2))))) * (cos((n*pi*x(t)) - (atan2((2*n*pi),5)) )));
 		end
 	end
