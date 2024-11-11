@@ -1,7 +1,8 @@
 %Henrique Amaral Onuki
 %fourier de 1/2 + 2/pi + somatorio( (1/n) * sen(n * pi * t)) 
+%+funcao do indutor e suas Harmonicas
 
-function fourierEx1Indutor(harm)
+function fourierEx1Indutor(out,ouths,harm)
 	%intervalo
 	x = linspace(-2,2,1000);
 
@@ -9,21 +10,37 @@ function fourierEx1Indutor(harm)
 	N = harm;
 
 	%y
-	y = (1/2)+(2/pi)*(zeros(size(x)));
-	vo = zeros(size(x));
+	y = (1/2)+(zeros(size(x))); %Vin
+	%vo = zeros(size(x));
+	voot = zeros(size(x)); %Vout
+	vooh = zeros(length(x), N); %Harmonicas individuais
+
 
 	%soma das harmonicas
 	for t = 1:length(x)
 		for n = 1:2:N
-			y(t) = y(t) + (sin(n * pi * x(t)))/n;
-			vo(t) = vo(t) + ( (4/(sqrt(25+(4*(n^2)*(pi^2))))) * (cos((n*pi*x(t)) - (atan2((2*n*pi),5)) )));
+			y(t) = y(t) + (2/pi)*(sin(n * pi * x(t)))/n; %soma todas harmonicas de entrada
+			%vo(t) = vo(t) + ( (4/(sqrt(25+(4*(n^2)*(pi^2))))) * (cos((n*pi*x(t)) - (atan2((2*n*pi),5)) )));
+
+			voo = (4*pi*n*i)/(5*pi*n+2*pi^2*n^2*i);
+			voom = abs(voo);
+			vooa = angle(voo);
+
+			voot(t) = voot(t) + ( voom * sin(n*pi*x(t) + vooa ) );
+
+			vooh(t,n) = ( voom * sin(n*pi*x(t) + vooa) );
 		end
 	end
 
-
 	%grafico
 	figure;
-        plot(x, y, 'b-', 'LineWidth', 2);
+
+	if ouths == 1
+		plot(x, vooh, 'k-', 'LineWidth', 0.5);
+	else
+		plot(x, y, 'b-', 'LineWidth', 2);
+	endif
+
         grid on;
         xlabel('t');
         ylabel('f(t)');
@@ -42,7 +59,15 @@ function fourierEx1Indutor(harm)
         
         %plot marcadores
         hold on;
-        plot(x, vo, 'm-', 'LineWidth', 2);
+
+	if ouths == 1
+		plot(x, y, 'b-', 'LineWidth', 2);
+	endif
+
+	if out == 1
+		plot(x, voot, 'm-', 'LineWidth', 2);
+	endif
+
         plot(x1, y1, 'ro', 'MarkerSize', 10, 'LineWidth', 2);
         plot(x2, y2, 'ro', 'MarkerSize', 10, 'LineWidth', 2);
         
