@@ -2,6 +2,11 @@
 %fourier de 1/2 + 2/pi + somatorio( (1/n) * sen(n * pi * t)) 
 %+funcao do indutor e suas Harmonicas
 
+%fourierEx1Indutor(out,ouths,harm)
+%out = 1, tensao no indutor
+%ouths = 1, harmonicas do indutor
+%harm, numero de harmonicas
+
 function fourierEx1Indutor(out,ouths,harm)
 	%intervalo
 	x = linspace(-2,2,1000);
