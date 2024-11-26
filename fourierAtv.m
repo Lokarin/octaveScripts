@@ -1,8 +1,7 @@
 %Henrique Amaral Onuki
 %fourier de -5/2 + 15/pi + somatorio( (sen(n * wo * t))/n ) 
-%+funcao do capacitor e suas Harmonicas
 
-%fourierAtv(out,ouths,harm)
+%fourierAtv(out,harm)
 %out = 1, tensao no indutor
 %harm, numero de harmonicas
 
